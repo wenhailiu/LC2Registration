@@ -1,0 +1,61 @@
+InputParameters:
+  FixedVolume:
+    Dimension: {x: 720, y: 440, z: 1}
+    Spacing: {x: 0.279545455, y: 0.279545455, z: 3.9}
+    Origin: {x: 0.0, y: 0.0, z: 0.0}
+    FilePath: /home/wenhai/img_registration_ws/test_2D3D/us_2D.raw
+    Format: raw
+    DataType: 2D
+    Label: Ultrasound_2D_Slice
+  MovingVolume:
+    Dimension: {x: 512, y: 512, z: 344}
+    Spacing: {x: 0.508372, y: 0.508372, z: 0.625}
+    Origin: {x: 0.0, y: 0.0, z: 0.0}
+    FilePath: /home/wenhai/img_registration_ws/test_2D3D/CT_FToB.raw
+    Format: raw
+    DataType: float32
+    Label: Ultrasound_Volume
+  RegistrationParameters:
+    HighResolutionModality: Fixed # or Moving
+    Type: Rigid
+    ResampledSpacing: {x: 1.3, y: 1.3, z: 3.9}
+    PatchSize: 3
+    FinalRoundExportRootPath: /home/wenhai/img_registration_ws/test_2D3D
+    CenterOverlaid: true 
+  OptimizerSettings:
+    InitialFRE: 50.0
+    InitialOffset: {translationX: 0.0, translationY: 0.0, translationZ: 0.0, rotationX: 0.0, rotationY: 0.0, rotationZ: 0.0}
+    DIRECT:
+      BoundRange: {translationX: 0.5, translationY: 0.5, translationZ: 0.5, rotationX: 0.5, rotationY: 0.5, rotationZ: 0.5}
+      MaxEvaluations: 100
+    BOBYQA:
+      BoundRange: {translationX: 1.0, translationY: 1.0, translationZ: 1.0, rotationX: 1.0, rotationY: 1.0, rotationZ: 1.0}
+      Rho_begin: 0.05
+      Tol: 1.0e-8
+      MaxIterations: 1000
+Outputs:
+  IsRegistered: true
+  TransformMatrix:
+    -
+      - 0.978687763
+      - -0.149876356
+      - -0.140382946
+      - 7.91628408
+    -
+      - 0.180310026
+      - 0.954340935
+      - 0.238163278
+      - -3.04998016
+    -
+      - 0.09827815
+      - -0.258399904
+      - 0.961026013
+      - 34.8759727
+    -
+      - 0
+      - 0
+      - 0
+      - 1
+  LastSimilarity: 0.270196378
+  NumEvaluations: 256
+  RegistrationDateTime: sd

@@ -1,0 +1,15 @@
+1. Generate 3D general template: 
+./CMS_RegistrationTools -m 3D -t
+
+2. Generate 2D general template: not supported
+./CMS_RegistrationTools -m 2D -t
+
+3. Generate target template file: 
+./CMS_RegistrationTools -m 3D -fixedPath /path/to/fixed/image/file.nrrd -movingPath /path/to/moxing/image/file.nrrd -outputPath /path/to/output/directory -tX 0 -tY 0 -tZ 0 -t
+
+4. Registration 2D: 
+./CMS_RegistrationTools -m 2D -c ./PathTo2DConfigurationFile.yaml
+
+5. Registration 3D: 
+./CMS_RegistrationTools -m 3D -c ./PathTo3DConfigurationFile.yaml
+

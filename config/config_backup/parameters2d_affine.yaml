@@ -1,0 +1,53 @@
+InputParameters:
+  FixedImage:
+    Dimension: {x: 512, y: 512}
+    Spacing: {x: 0.508378906, y: 0.508378906}
+    Origin: {x: 0.0, y: 0.0}
+    FilePath: /home/wenhai/img_registration_ws/test2D_Affine/CT.raw
+    Format: raw
+    DataType: float32
+    Label: CT_Image
+  MovingImage:
+    Dimension: {x: 720, y: 440}
+    Spacing: {x: 0.279545455, y: 0.279545455}
+    Origin: {x: 0.0, y: 0.0}
+    FilePath: /home/wenhai/img_registration_ws/test2D_Affine/us_2D.raw
+    Format: raw
+    DataType: float32
+    Label: Ultrasound_Image
+  RegistrationParameters:
+    HighResolutionModality: Fixed # or Moving
+    Type: Affine
+    ResampledSpacing: {x: 1.0, y: 1.0}
+    PatchSize: 9
+    FinalRoundExportRootPath: /home/wenhai/img_registration_ws/test2D_Affine
+    CenterOverlaid: true 
+  OptimizerSettings:
+    InitialFRE: 30.0
+    InitialOffset: {translationX: 10.0, translationY: 0.0, rotation: 0.0, scaleX: 1.0, scaleY: 1.0, shear: 0.0}
+    DIRECT:
+      BoundRange: {translationX: 0.5, translationY: 0.5, rotation: 0.5, scaleX: 0.5, scaleY: 0.5, shear: 0.5}
+      MaxEvaluations: 30
+    BOBYQA:
+      BoundRange: {translationX: 1.0, translationY: 1.0, rotation: 1.0, scaleX: 1.0, scaleY: 1.0, shear: 1.0}
+      Rho_begin: 0.1
+      Tol: 1.0e-8
+      MaxIterations: 1000
+Outputs:
+  IsRegistered: true
+  TransformMatrix:
+    -
+      - 0.996527612
+      - -0.0832632855
+      - 33.1023521
+    -
+      - 0.0832632855
+      - 0.996527612
+      - 12.5386543
+    -
+      - 0
+      - 0
+      - 1
+  LastSimilarity: 0.258853257
+  NumEvaluations: 103
+  RegistrationDateTime: "Tue Nov 19 13:18:23 2019\n"

@@ -1,0 +1,53 @@
+InputParameters:
+  FixedImage:
+    Dimension: {x: 321, y: 297}
+    Spacing: {x: 0.508378906, y: 0.508378906}
+    Origin: {x: 0.0, y: 0.0}
+    FilePath: /home/wenhai/vsc_workspace/RegistrationTools/config/Data/CT_KidneyPhantom.raw
+    Format: raw
+    DataType: float32
+    Label: CT_Image
+  MovingImage:
+    Dimension: {x: 419, y: 310}
+    Spacing: {x: 0.310571, y: 0.310571}
+    Origin: {x: 0.0, y: 0.0}
+    FilePath: /home/wenhai/vsc_workspace/RegistrationTools/config/Data/US_KidneyPhantom.raw
+    Format: raw
+    DataType: float32
+    Label: Ultrasound_Image
+  RegistrationParameters:
+    HighResolutionModality: Fixed # or Moving
+    Type: Rigid
+    ResampledSpacing: {x: 1.0, y: 1.0}
+    PatchSize: 9
+    FinalRoundExportRootPath: /home/wenhai/vsc_workspace/RegistrationTools/config/Data
+    CenterOverlaid: true 
+  OptimizerSettings:
+    InitialFRE: 30.0
+    InitialOffset: {translationX: 0.0, translationY: 0.0, rotation: 0.0}
+    DIRECT:
+      BoundRange: {translationX: 0.5, translationY: 0.5, rotation: 0.5}
+      MaxEvaluations: 30
+    BOBYQA:
+      BoundRange: {translationX: 1.0, translationY: 1.0, rotation: 1.0}
+      Rho_begin: 0.01
+      Tol: 1.0e-6
+      MaxIterations: 1000
+Outputs:
+  IsRegistered: true
+  TransformMatrix:
+    -
+      - 0.996527612
+      - -0.0832632855
+      - 33.1023521
+    -
+      - 0.0832632855
+      - 0.996527612
+      - 12.5386543
+    -
+      - 0
+      - 0
+      - 1
+  LastSimilarity: 0.258853257
+  NumEvaluations: 103
+  RegistrationDateTime: "Tue Nov 19 13:18:23 2019\n"

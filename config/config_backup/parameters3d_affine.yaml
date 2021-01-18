@@ -1,0 +1,61 @@
+InputParameters:
+  FixedVolume:
+    Dimension: {x: 394, y: 466, z: 378} #MUST 
+    Spacing: {x: 0.5, y: 0.5, z: 0.5} #MUST 
+    Origin: {x: -98.0, y: -134.0, z: -72.0} #OPTION, 0 0 0 
+    FilePath: /home/wenhai/img_registration_ws/mni_group01/01_mr_tal.raw #MUST 
+    Format: raw #MUST 
+    DataType: float32
+    Label: CT_CoronalViewFToB MNI_dataset
+  MovingVolume:
+    Dimension: {x: 323, y: 366, z: 371} #MUST 
+    Spacing: {x: 0.3, y: 0.3, z: 0.3} #MUST 
+    Origin: {x: -42.2, y: -52.7, z: -59.4} #OPTION, 0 0 0 
+    FilePath: /home/wenhai/img_registration_ws/mni_group01/01a_us_tal.raw #MUST 
+    Format: raw #MUST 
+    DataType: float32
+    Label: Ultrasound_Volume MNI_dataset
+  RegistrationParameters:
+    HighResolutionModality: Fixed # or Moving
+    Type: Rigid
+    ResampledSpacing: {x: 1.3, y: 1.3, z: 1.3} #MUST 
+    PatchSize: 3 #MUST 
+    FinalRoundExportRootPath: /home/wenhai/img_registration_ws/mni_group01 #MUST 
+    CenterOverlaid: false 
+  OptimizerSettings:
+    InitialFRE: 30.0 #TUNE 
+    InitialOffset: {translationX: 0.0, translationY: 0.0, translationZ: 0.0, rotationX: 0.0, rotationY: 0.0, rotationZ: 0.0, scaleX: 1.0, scaleY: 1.0, scaleZ: 1.0, shearXY: 0.0, shearXZ: 0.0, shearYZ: 0.0} #TUNE 
+    DIRECT:
+      BoundRange: {translationX: 0.3, translationY: 0.3, translationZ: 0.3, rotationX: 0.3, rotationY: 0.3, rotationZ: 0.3, scaleX: 0.3, scaleY: 0.3, scaleZ: 0.3, shearXY: 0.3, shearXZ: 0.3, shearYZ: 0.3} #TUNE 
+      MaxEvaluations: 100 #TUNE 
+    BOBYQA:
+      BoundRange: {translationX: 1.0, translationY: 1.0, translationZ: 1.0, rotationX: 1.0, rotationY: 1.0, rotationZ: 1.0, scaleX: 1.0, scaleY: 1.0, scaleZ: 1.0, shearXY: 1.0, shearXZ: 1.0, shearYZ: 1.0} #FIXED 
+      Rho_begin: 0.01 #TUNE 
+      Tol: 1.0e-8 #TUNE 
+      MaxIterations: 1000 #FIXED 
+Outputs:
+  IsRegistered: true
+  TransformMatrix:
+    -
+      - 0.999353051
+      - -0.0348830447
+      - -0.00875627343
+      - 0.769383967
+    -
+      - 0.0348841809
+      - 0.999391377
+      - -2.28275894e-05
+      - 1.72534144
+    -
+      - 0.00875173975
+      - -0.000282642577
+      - 0.999961734
+      - 0.149243146
+    -
+      - 0
+      - 0
+      - 0
+      - 1
+  LastSimilarity: 0.151439726
+  NumEvaluations: 239
+  RegistrationDateTime: sd

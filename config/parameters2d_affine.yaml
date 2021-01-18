@@ -1,0 +1,60 @@
+InputParameters:
+  FixedImage:
+    Dimension: {x: 512, y: 512}
+    Spacing: {x: 0.508378906, y: 0.508378906}
+    Origin: {x: 0.0, y: 0.0}
+    FilePath: /home/wenhai/img_registration_ws/test2D_Affine/CT.raw
+    Format: raw
+    DataType: float32
+    Label: CT_Image
+  MovingImage:
+    Dimension: {x: 720, y: 440}
+    Spacing: {x: 0.279545455, y: 0.279545455}
+    Origin: {x: 0.0, y: 0.0}
+    FilePath: /home/wenhai/img_registration_ws/test2D_Affine/us_2D.raw
+    Format: raw
+    DataType: float32
+    Label: Ultrasound_Image
+  RegistrationParameters:
+    HighResolutionModality: Fixed # or Moving
+    Type: Affine
+    DisplayPattern: 2
+    ResampledSpacing: {x: 1.0, y: 1.0}
+    PatchSize: 9
+    FinalRoundExportRootPath: /home/wenhai/img_registration_ws/test2D_Affine
+    CenterOverlaid: true 
+  OptimizerSettings:
+    InitialValues: {TX: 0.0, TY: 0.0, R: 0.0, ScaleX: 1.0, ScaleY: 1.0, Shear: 0.0}  
+    LowerBounds: {TX: -30.0, TY: -30.0, R: -15.0, ScaleX: 0.8, ScaleY: 0.8, Shear: -0.2}
+    UpperBounds: {TX: 30.0, TY: 30.0, R: 15.0, ScaleX: 1.2, ScaleY: 1.2, Shear: 0.2}
+    DIRECT:
+      Enabled: false
+      OptimizedEntries: {Translation: true, Rotation: false, Scale: false, Shear: false}
+      MaxEvaluations: 50  
+    BOBYQA:
+      0: 
+        Enabled: false
+        OptimizedEntries: {Translation: true, Rotation: true, Scale: false, Shear: false}
+        AbsTol: 1.0e-4
+      1: 
+        Enabled: false
+        OptimizedEntries: {Translation: true, Rotation: true, Scale: true, Shear: true}
+        AbsTol: 1.0e-4
+Outputs:
+  IsRegistered: true
+  TransformMatrix:
+    -
+      - 0.996527612
+      - -0.0832632855
+      - 33.1023521
+    -
+      - 0.0832632855
+      - 0.996527612
+      - 12.5386543
+    -
+      - 0
+      - 0
+      - 1
+  LastSimilarity: 0.258853257
+  NumEvaluations: 103
+  RegistrationDateTime: "Tue Nov 19 13:18:23 2019\n"

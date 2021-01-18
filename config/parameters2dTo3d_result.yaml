@@ -1,0 +1,68 @@
+InputParameters:
+  FixedVolume:
+    Dimension: {x: 327, y: 584, z: 1}
+    Spacing: {x: 0.229762, y: 0.229762, z: 0.229762}
+    Origin: {x: 0.0, y: 0.0, z: 0.0}
+    FilePath: D:/Data/KidneyUltrasound/RightKidney.raw
+    Format: raw
+    DataType: 2D
+    Label: Ultrasound_2D_Slice
+  MovingVolume:
+    Dimension: {x: 512, y: 512, z: 451}
+    Spacing: {x: 0.686, y: 0.686, z: 0.8}
+    Origin: {x: 0.0, y: 0.0, z: 0.0}
+    FilePath: D:/Data/KidneyUltrasound/ct_data.raw
+    Format: raw
+    DataType: float32
+    Label: CT
+  RegistrationParameters:
+    HighResolutionModality: Moving
+    Type: Affine
+    DisplayPattern: 0
+    ResampledSpacing: {x: 0.229762, y: 0.229762, z: 0.229762}
+    PatchSize: 3
+    FinalRoundExportRootPath: D:/Data/KidneyUltrasound
+    CenterOverlaid: false
+  OptimizerSettings:
+    InitialValues: {TX: 180.113724, TY: 50.1020012, TZ: 60.3831635, RX: 90.0968018, RY: 30.9624405, RZ: 30.2145901, ScaleX: 0.996347487, ScaleY: 0.872895181, ScaleZ: 0.999675155, ShearX: 0.00370246777, ShearY: 0.00350599363, ShearZ: -0.0138275782}
+    LowerBounds: {TX: -30.0, TY: -30.0, TZ: -30.0, RX: -30.0, RY: -30.0, RZ: -30.0, ScaleX: 0.8, ScaleY: 0.8, ScaleZ: 0.8, ShearX: -0.2, ShearY: -0.2, ShearZ: -0.2}
+    UpperBounds: {TX: 30.0, TY: 30.0, TZ: 30.0, RX: 30.0, RY: 30.0, RZ: 30.0, ScaleX: 1.2, ScaleY: 1.2, ScaleZ: 1.2, ShearX: 0.2, ShearY: 0.2, ShearZ: 0.2}
+    DIRECT:
+      Enabled: false
+      OptimizedEntries: {Translation: true, Rotation: false, Scale: false, Shear: false}
+      MaxEvaluations: 100
+    BOBYQA:
+      0:
+        Enabled: false
+        OptimizedEntries: {Translation: true, Rotation: true, Scale: false, Shear: false}
+        AbsTol: 1.0e-4
+      1:
+        Enabled: true
+        OptimizedEntries: {Translation: true, Rotation: true, Scale: true, Shear: true}
+        AbsTol: 1.0e-4
+Outputs:
+  IsRegistered: true
+  TransformMatrix:
+    -
+      - 0.740277112
+      - 0.435242683
+      - -0.519543529
+      - -143.153122
+    -
+      - 0.518253028
+      - 0.281235933
+      - 0.98234421
+      - -138.111359
+    -
+      - 0.502651453
+      - -0.864863813
+      - -0.00144921476
+      - -7.85894918
+    -
+      - 0
+      - 0
+      - 0
+      - 1
+  LastSimilarity: 0.36598437062517719
+  NumEvaluations: 294
+  RegistrationDateTime: "Thu Sep 17 09:44:56 2020\n"

@@ -1,0 +1,68 @@
+InputParameters:
+  FixedVolume:
+    Dimension: {x: 327, y: 584, z: 1}
+    Spacing: {x: 0.229762, y: 0.229762, z: 0.229762}
+    Origin: {x: 0.0, y: 0.0, z: 0.0}
+    FilePath: D:/Data/KidneyUltrasound/RightKidney.raw
+    Format: raw
+    DataType: 2D
+    Label: Ultrasound_2D_Slice
+  MovingVolume:
+    Dimension: {x: 512, y: 512, z: 451}
+    Spacing: {x: 0.686, y: 0.686, z: 0.8}
+    Origin: {x: 0.0, y: 0.0, z: 0.0}
+    FilePath: D:/Data/KidneyUltrasound/ct_data.raw
+    Format: raw
+    DataType: float32
+    Label: CT
+  RegistrationParameters:
+    HighResolutionModality: Moving # or Moving
+    Type: Affine
+    DisplayPattern: 0
+    ResampledSpacing: {x: 0.8, y: 0.8, z: 0.8} # must be integral multiples of the 2D frame's spacing
+    PatchSize: 3
+    FinalRoundExportRootPath: D:/Data/KidneyUltrasound
+    CenterOverlaid: false 
+  OptimizerSettings:
+    InitialValues: {TX: 200.0, TY: 70.0, TZ: 60.0, RX: 90.0, RY: -30.0, RZ: 40.0, ScaleX: 1.0, ScaleY: 1.0, ScaleZ: 1.0, ShearX: 0.0, ShearY: 0.0, ShearZ: 0.0}  
+    LowerBounds: {TX: -30.0, TY: -30.0, TZ: -30.0, RX: -30.0, RY: -30.0, RZ: -30.0, ScaleX: 0.8, ScaleY: 0.8, ScaleZ: 0.8, ShearX: -0.2, ShearY: -0.2, ShearZ: -0.2}
+    UpperBounds: {TX: 30.0, TY: 30.0, TZ: 30.0, RX: 30.0, RY: 30.0, RZ: 30.0, ScaleX: 1.2, ScaleY: 1.2, ScaleZ: 1.2, ShearX: 0.2, ShearY: 0.2, ShearZ: 0.2}
+    DIRECT:
+      Enabled: true
+      OptimizedEntries: {Translation: true, Rotation: false, Scale: false, Shear: false}
+      MaxEvaluations: 100  
+    BOBYQA:
+      0: 
+        Enabled: true
+        OptimizedEntries: {Translation: true, Rotation: true, Scale: false, Shear: false}
+        AbsTol: 1.0e-4
+      1: 
+        Enabled: true
+        OptimizedEntries: {Translation: true, Rotation: true, Scale: true, Shear: true}
+        AbsTol: 1.0e-4
+Outputs:
+  IsRegistered: true
+  TransformMatrix:
+    -
+      - 0.978687763
+      - -0.149876356
+      - -0.140382946
+      - 7.91628408
+    -
+      - 0.180310026
+      - 0.954340935
+      - 0.238163278
+      - -3.04998016
+    -
+      - 0.09827815
+      - -0.258399904
+      - 0.961026013
+      - 34.8759727
+    -
+      - 0
+      - 0
+      - 0
+      - 1
+  LastSimilarity: 0.270196378
+  NumEvaluations: 256
+  RegistrationDateTime: sd
